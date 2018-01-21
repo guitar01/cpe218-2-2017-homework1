@@ -58,10 +58,18 @@ public class Homework1 {
 		int right = calculator(n.getRight());
 
 		switch (n.getValue()){
-			case "+":result = left + right;break;
-			case "-":result = left - right;break;
-			case "*":result = left * right;break;
-			case "/":result = left / right;break;
+			case "+":
+				result = left + right;
+				break;
+			case "-":
+				result = left - right;
+				break;
+			case "*":
+				result = left * right;
+				break;
+			case "/":
+				result = left / right;
+				break;
 		}
 
 		return result;
