@@ -1,4 +1,4 @@
-
+//SDK ver.9
 import javax.swing.JEditorPane;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -81,10 +81,10 @@ public class Homework1 extends JPanel implements TreeSelectionListener {
         System.out.println(text);
 
 
-        Node finalN = n;
+        Node finalNode = n;
         javax.swing.SwingUtilities.invokeLater(new Runnable() {
             public void run() {
-                createAndShowGUI(finalN);
+                createAndShowGUI(finalNode);
             }
         });
     }
@@ -92,14 +92,9 @@ public class Homework1 extends JPanel implements TreeSelectionListener {
 	public static Node infix(Node n){
 		if (!n.getValue().matches("[0-9]")) {
 			n.setRight(n.getLeft());
-			if (n.getLeft().getValue().matches("[0-9]")) {
-				n.setLeft(n.getRight().getLeft());
-				n.getRight().setLeft(null);
-			} else {
-				n.setRight(n.getLeft());
-				n.setLeft(n.getRight().getLeft().getLeft());
-				n.getRight().getLeft().setLeft(null);
-			}
+            Node tmp = getFirstLeftOperand(n);
+            n.setLeft(tmp.getLeft());
+            tmp.setLeft(null);
 		}
 		return n;
 	}
@@ -185,6 +180,12 @@ public class Homework1 extends JPanel implements TreeSelectionListener {
             System.err.println("Couldn't find file: " + path);
             return null;
         }
+    }
+
+    private static Node getFirstLeftOperand(Node n){
+        if(n.getValue().matches("[0-9]"))
+            return n;
+        return getFirstLeftOperand(n.getLeft());
     }
 
 }
